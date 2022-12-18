@@ -46,7 +46,7 @@ describe('Ticketbox', () => {
         cy.get('h1').should('contain', 'TICKETBOX')
     })
 
-    it('Successfully submits the form', () => {
+    it.only('Successfully submits the form', () => {
         const firstName = 'Milos'
         const lastName = 'Kos'
         const fullName = `${firstName} ${lastName}`
