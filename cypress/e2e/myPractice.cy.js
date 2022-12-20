@@ -45,10 +45,25 @@ beforeEach(() => cy.visit('https://ticket-box.s3.eu-central-1.amazonaws.com/inde
     })
 
     it.only('Reset button bug', ()=>{
-        cy.get('.reset')
+        cy.get('.reset').click()
         cy.get('#general').should('not.be.selected')
         cy.get('#vip').should('not.be.selected')
-        cy.get('fieldset > p').should('contain', 'General Admission')
+        cy.get('fieldset > p').should('not.contain', 'General Admission')
         //on reset, none of radio buttons are checked, but still in Purchase Agreement is written that General Admission card is selected
+    })
+
+    it('Reset button working with input fields', ()=>{
+        var firstName = 'Milos'
+        var lastName = 'Kos'
+        var email = 'milos.kos@email.com'
+        var signature = `${firstName} ${lastName}`
+
+        cy.get('#first-name').type(firstName)
+        cy.get('#last-name').type(lastName)
+        cy.get('#email').type(email)
+        cy.get('#signature').type(signature)
+        cy.get('.reset').click()
+
+        cy.get('[type="text"]').should('be.empty')
     })
 })
